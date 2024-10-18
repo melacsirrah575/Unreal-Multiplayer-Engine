@@ -14,9 +14,21 @@ class MULTIPLAYERENGINE_API AMovingPlatform : public AStaticMeshActor
 {
 	GENERATED_BODY()
 
-	UPROPERTY(EditAnywhere)
-	int32 myInt = 0;
+public:
+	AMovingPlatform();
 
+protected:
+	virtual void BeginPlay() override;
+	virtual void Tick(float DeltaTime) override;
+
+private:
 	UPROPERTY(EditAnywhere)
-	float myFloat = 0;
+	float mMoveSpeed = 20.0;
+
+	// MakeEditWidget creates a gizmo in editor we can move around
+	UPROPERTY(EditAnywhere, Meta = (MakeEditWidget = true))
+	FVector mTargetLocation;
+
+	FVector mGlobalTargetLocation;
+	FVector mGlobalStartLocation;
 };
